@@ -27,15 +27,7 @@ local assets = {
 	toggleBackground = "rbxassetid://18772190202",
 	togglerHead = "rbxassetid://18772309008",
 	buttonImage = "rbxassetid://10709791437",
-	searchIcon = "rbxassetid://86737463322606",
-	colorWheel = "rbxassetid://2849458409",
-	colorTarget = "rbxassetid://73265255323268",
-	grid = "rbxassetid://121484455191370",
-	globe = "rbxassetid://18767849817",
-	transform = "rbxassetid://10734900011",
-	dropdown = "rbxassetid://18865373378",
-	sliderbar = "rbxassetid://18772615246",
-	sliderhead = "rbxassetid://18772834246",
+	searchIcon = "rbxassetid://86737463322606"
 }
 
 --// Functions
@@ -316,7 +308,7 @@ function MacLib:Window(Settings)
 
 	local globalSettingsButton = Instance.new("ImageButton")
 	globalSettingsButton.Name = "GlobalSettingsButton"
-	globalSettingsButton.Image = assets.globe
+	globalSettingsButton.Image = "rbxassetid://18767849817"
 	globalSettingsButton.ImageTransparency = 0.4
 	globalSettingsButton.AnchorPoint = Vector2.new(1, 0.5)
 	globalSettingsButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -533,7 +525,7 @@ function MacLib:Window(Settings)
 		Enum.FontWeight.SemiBold,
 		Enum.FontStyle.Normal
 	)
-	username.Text = "@" .. LocalPlayer.Name
+	username.Text = "@"..LocalPlayer.Name
 	username.TextColor3 = Color3.fromRGB(255, 255, 255)
 	username.TextSize = 12
 	username.TextTransparency = 0.8
@@ -654,7 +646,7 @@ function MacLib:Window(Settings)
 
 	local moveIcon = Instance.new("ImageButton")
 	moveIcon.Name = "MoveIcon"
-	moveIcon.Image = assets.transform
+	moveIcon.Image = "rbxassetid://10734900011"
 	moveIcon.ImageTransparency = 0.5
 	moveIcon.AnchorPoint = Vector2.new(1, 0.5)
 	moveIcon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1345,11 +1337,9 @@ function MacLib:Window(Settings)
 			tabSwitcherUIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
 			tabSwitcherUIListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 			tabSwitcherUIListLayout.Parent = tabSwitcher
-			
-			local tabImage
-			
+
 			if Settings.Image then
-				tabImage = Instance.new("ImageLabel")
+				local tabImage = Instance.new("ImageLabel")
 				tabImage.Name = "TabImage"
 				tabImage.Image = Settings.Image
 				tabImage.ImageTransparency = 0.4
@@ -1402,13 +1392,11 @@ function MacLib:Window(Settings)
 			elements1.BorderSizePixel = 0
 			elements1.Position = UDim2.fromOffset(0, 63)
 			elements1.Size = UDim2.new(1, 0, 1, -63)
-			elements1.ClipsDescendants = true
 
 			local elementsUIPadding = Instance.new("UIPadding")
 			elementsUIPadding.Name = "ElementsUIPadding"
 			elementsUIPadding.PaddingRight = UDim.new(0, 5)
 			elementsUIPadding.PaddingTop = UDim.new(0, 10)
-			elementsUIPadding.PaddingBottom = UDim.new(0, 10)
 			elementsUIPadding.Parent = elements1
 
 			local elementsScrolling = Instance.new("ScrollingFrame")
@@ -1424,11 +1412,10 @@ function MacLib:Window(Settings)
 			elementsScrolling.BorderColor3 = Color3.fromRGB(0, 0, 0)
 			elementsScrolling.BorderSizePixel = 0
 			elementsScrolling.Size = UDim2.fromScale(1, 1)
-			elementsScrolling.ClipsDescendants = false
 
 			local elementsScrollingUIPadding = Instance.new("UIPadding")
 			elementsScrollingUIPadding.Name = "ElementsScrollingUIPadding"
-			elementsScrollingUIPadding.PaddingBottom = UDim.new(0, 5)
+			elementsScrollingUIPadding.PaddingBottom = UDim.new(0, 15)
 			elementsScrollingUIPadding.PaddingLeft = UDim.new(0, 11)
 			elementsScrollingUIPadding.PaddingRight = UDim.new(0, 3)
 			elementsScrollingUIPadding.PaddingTop = UDim.new(0, 5)
@@ -1672,7 +1659,7 @@ function MacLib:Window(Settings)
 
 					local togglerHead = Instance.new("ImageLabel")
 					togglerHead.Name = "TogglerHead"
-					togglerHead.Image = assets.togglerHead
+					togglerHead.Image = "rbxassetid://18772309008"
 					togglerHead.ImageColor3 = Color3.fromRGB(91, 91, 91)
 					togglerHead.AnchorPoint = Vector2.new(1, 0.5)
 					togglerHead.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -1859,7 +1846,7 @@ function MacLib:Window(Settings)
 
 					local sliderBar = Instance.new("ImageLabel")
 					sliderBar.Name = "SliderBar"
-					sliderBar.Image = assets.sliderbar
+					sliderBar.Image = "rbxassetid://18772615246"
 					sliderBar.ImageColor3 = Color3.fromRGB(87, 86, 86)
 					sliderBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					sliderBar.BackgroundTransparency = 1
@@ -1870,7 +1857,7 @@ function MacLib:Window(Settings)
 
 					local sliderHead = Instance.new("ImageButton")
 					sliderHead.Name = "SliderHead"
-					sliderHead.Image = assets.sliderhead
+					sliderHead.Image = "rbxassetid://18772834246"
 					sliderHead.AnchorPoint = Vector2.new(0.5, 0.5)
 					sliderHead.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 					sliderHead.BackgroundTransparency = 1
@@ -1962,9 +1949,6 @@ function MacLib:Window(Settings)
 					sliderHead.InputEnded:Connect(function(input)
 						if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 							dragging = false
-							if Settings.onInputComplete then
-								Settings.onInputComplete(finalValue)
-							end
 						end
 					end)
 
@@ -1985,10 +1969,6 @@ function MacLib:Window(Settings)
 						else
 							sliderValue.Text = ValueDisplayMethod(sliderValue)
 						end
-						
-						if Settings.onInputComplete then
-							Settings.onInputComplete(finalValue)
-						end
 					end)
 
 					UserInputService.InputChanged:Connect(function(input)
@@ -2003,7 +1983,7 @@ function MacLib:Window(Settings)
 						local sliderNameWidth = sliderName.AbsoluteSize.X
 						local totalWidth = sliderElements.AbsoluteSize.X
 
-						local newBarWidth = (totalWidth - (padding + sliderValueWidth + sliderNameWidth + 20)) / baseUIScale.Scale
+						local newBarWidth = totalWidth - (padding + sliderValueWidth + sliderNameWidth + 20)
 						sliderBar.Size = UDim2.new(sliderBar.Size.X.Scale, newBarWidth, sliderBar.Size.Y.Scale, sliderBar.Size.Y.Offset)
 					end
 
@@ -2154,7 +2134,7 @@ function MacLib:Window(Settings)
 						local nameWidth = InputName.AbsoluteSize.X
 						local totalWidth = Input.AbsoluteSize.X
 
-						local maxWidth = (totalWidth - nameWidth - 20) / baseUIScale.Scale
+						local maxWidth = totalWidth - nameWidth - 20
 						Constraint.MaxSize = Vector2.new(maxWidth, 9e9)
 					end
 
@@ -2296,16 +2276,7 @@ function MacLib:Window(Settings)
 					binderBox.Parent = keybind
 
 					local focused
-					local isBinding = false
-					local reset = false
 					local binded = Settings.Default
-					
-					local function resetFocusState()
-						focused = false
-						isBinding = false
-						binderBox:ReleaseFocus()
-					end
-
 					if binded then
 						binderBox.Text = binded.Name
 					end
@@ -2313,81 +2284,42 @@ function MacLib:Window(Settings)
 					binderBox.Focused:Connect(function()
 						focused = true
 					end)
-
 					binderBox.FocusLost:Connect(function()
 						focused = false
 					end)
 
-					UserInputService.InputBegan:Connect(function(inp)
-						if focused and not isBinding then
-							isBinding = true
-
-							local Event
-							Event = UserInputService.InputBegan:Connect(function(input)
-								if Settings.Blacklist and (table.find(Settings.Blacklist, input.KeyCode) or table.find(Settings.Blacklist, input.UserInputType)) then
-									binderBox:ReleaseFocus()
-									resetFocusState()
-									Event:Disconnect()
-									return
-								end
-
-								if input.UserInputType == Enum.UserInputType.Keyboard then
-									binded = input.KeyCode
-									binderBox.Text = input.KeyCode.Name
-								elseif input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.MouseButton2 then
-									binded = input.UserInputType
-									binderBox.Text = input.UserInputType.Name
-								end
-
+					UserInputService.InputEnded:Connect(function(inp)
+						if macLib ~= nil then
+							if focused and inp.KeyCode.Name ~= "Unknown" then
+								binded = inp.KeyCode
+								KeybindFunctions.Bind = binded
+								binderBox.Text = inp.KeyCode.Name
+								binderBox:ReleaseFocus()
 								if Settings.onBinded then
 									Settings.onBinded(binded)
 								end
-								reset = true
-								resetFocusState()
-								Event:Disconnect()
-							end)
-						else
-							if not reset and (inp.KeyCode == binded or inp.UserInputType == binded) then
+							elseif inp.KeyCode == binded then
 								if KeybindFunctions.Callback then
 									KeybindFunctions.Callback(binded)
 								end
-								if Settings.onBindHeld then
-									Settings.onBindHeld(true, binded)
-								end
-							else
-								reset = false
 							end
 						end
 					end)
-
-					UserInputService.InputEnded:Connect(function(inp)
-						if not focused and not isBinding then
-							if inp.KeyCode == binded or inp.UserInputType == binded then
-								if Settings.onBindHeld then
-									Settings.onBindHeld(false, binded)
-								end
-							end
-						end
-					end)
-
 					function KeybindFunctions:Bind(Key)
 						binded = Key
 						binderBox.Text = Key.Name
+						KeybindFunctions.Bind = binded
 					end
-
 					function KeybindFunctions:Unbind()
 						binded = nil
 						binderBox.Text = ""
 					end
-
 					function KeybindFunctions:GetBind()
 						return binded
 					end
-
 					function KeybindFunctions:UpdateName(Name)
 						keybindName = Name
 					end
-
 					function KeybindFunctions:SetVisibility(State)
 						keybind.Visible = State
 					end
@@ -2395,7 +2327,6 @@ function MacLib:Window(Settings)
 					if Flag then
 						MacLib.Options[Flag] = KeybindFunctions
 					end
-
 					return KeybindFunctions
 				end
 
@@ -2469,7 +2400,7 @@ function MacLib:Window(Settings)
 
 					local dropdownImage = Instance.new("ImageLabel")
 					dropdownImage.Name = "DropdownImage"
-					dropdownImage.Image = assets.dropdown
+					dropdownImage.Image = "rbxassetid://18865373378"
 					dropdownImage.ImageTransparency = 0.5
 					dropdownImage.AnchorPoint = Vector2.new(1, 0)
 					dropdownImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -2682,23 +2613,19 @@ function MacLib:Window(Settings)
 						local isDropdownOpen = not dropped
 						local targetSize = isDropdownOpen and UDim2.new(1, 0, 0, CalculateDropdownSize()) or UDim2.new(1, 0, 0, defaultDropdownSize)
 
-						local dropTween = Tween(dropdown, TweenInfo.new(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
+						local tween = Tween(dropdown, TweenInfo.new(0.2, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {
 							Size = targetSize
 						})
-						local iconTween = Tween(dropdownImage, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-							Rotation = isDropdownOpen and -90 or 0
-						})
 
-						dropTween:Play()
-						iconTween:Play()
+						tween:Play()
 
 						if isDropdownOpen then
 							dropdownFrame.Visible = true
-							dropTween.Completed:Connect(function()
+							tween.Completed:Connect(function()
 								db = false
 							end)
 						else
-							dropTween.Completed:Connect(function()
+							tween.Completed:Connect(function()
 								dropdownFrame.Visible = false
 								db = false
 							end)
@@ -2876,47 +2803,20 @@ function MacLib:Window(Settings)
 					end
 					function DropdownFunctions:UpdateSelection(newSelection)
 						if not newSelection then return end
-
-						for option, _ in pairs(OptionObjs) do
-							Toggle(option, false)
-						end
-
-						local selectedOptions = {}
 						if type(newSelection) == "number" then
 							for option, data in pairs(OptionObjs) do
 								local isSelected = data.Index == newSelection
 								Toggle(option, isSelected)
-								if isSelected then
-									table.insert(selectedOptions, option)
-								end
 							end
 						elseif type(newSelection) == "string" then
 							for option, data in pairs(OptionObjs) do
 								local isSelected = option == newSelection
 								Toggle(option, isSelected)
-								if isSelected then
-									table.insert(selectedOptions, option)
-								end
 							end
 						elseif type(newSelection) == "table" then
 							for option, _ in pairs(OptionObjs) do
 								local isSelected = table.find(newSelection, option) ~= nil
 								Toggle(option, isSelected)
-								if isSelected then
-									table.insert(selectedOptions, option)
-								end
-							end
-						end
-
-						if DropdownFunctions.Callback then
-							if Settings.Multi then
-								local Return = {}
-								for _, opt in ipairs(selectedOptions) do
-									Return[opt] = true
-								end
-								DropdownFunctions.Callback(Return)
-							else
-								DropdownFunctions.Callback(selectedOptions[1] or nil)
 							end
 						end
 					end
@@ -3026,7 +2926,7 @@ function MacLib:Window(Settings)
 
 					local colorCbg = Instance.new("ImageLabel")
 					colorCbg.Name = "NewColor"
-					colorCbg.Image = assets.grid
+					colorCbg.Image = "rbxassetid://121484455191370"
 					colorCbg.ScaleType = Enum.ScaleType.Tile
 					colorCbg.TileSize = UDim2.fromOffset(500, 500)
 					colorCbg.AnchorPoint = Vector2.new(1, 0.5)
@@ -3211,7 +3111,7 @@ function MacLib:Window(Settings)
 
 					local wheel1 = Instance.new("ImageButton")
 					wheel1.Name = "Wheel"
-					wheel1.Image = assets.colorWheel
+					wheel1.Image = "rbxassetid://2849458409"
 					wheel1.AutoButtonColor = false
 					wheel1.Active = false
 					wheel1.BackgroundColor3 = Color3.fromRGB(248, 248, 248)
@@ -3223,7 +3123,7 @@ function MacLib:Window(Settings)
 
 					local target = Instance.new("ImageLabel")
 					target.Name = "Target"
-					target.Image = assets.colorTarget
+					target.Image = "rbxassetid://73265255323268"
 					target.ImageColor3 = Color3.fromRGB(0, 0, 0)
 					target.AnchorPoint = Vector2.new(0.5, 0.5)
 					target.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -3738,7 +3638,7 @@ function MacLib:Window(Settings)
 
 					local newColor = Instance.new("ImageLabel")
 					newColor.Name = "NewColor"
-					newColor.Image = assets.grid
+					newColor.Image = "rbxassetid://121484455191370"
 					newColor.ScaleType = Enum.ScaleType.Tile
 					newColor.TileSize = UDim2.fromOffset(500, 500)
 					newColor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -3769,7 +3669,7 @@ function MacLib:Window(Settings)
 
 					local oldColor = Instance.new("ImageLabel")
 					oldColor.Name = "OldColor"
-					oldColor.Image = assets.grid
+					oldColor.Image = "rbxassetid://121484455191370"
 					oldColor.ScaleType = Enum.ScaleType.Tile
 					oldColor.TileSize = UDim2.fromOffset(500, 500)
 					oldColor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -4283,12 +4183,6 @@ function MacLib:Window(Settings)
 
 						UpdateSlideFromValue(value)
 						UpdateRingFromHSV(hue, saturation)
-						
-						if ColorpickerFunctions.Callback then
-							task.spawn(function()
-								ColorpickerFunctions.Callback(ColorpickerFunctions.Color, isAlpha and ColorpickerFunctions.Alpha)
-							end)
-						end
 					end
 
 					function ColorpickerFunctions:SetAlpha(alpha)
@@ -4595,31 +4489,27 @@ function MacLib:Window(Settings)
 					currentTabInstance.Parent = nil
 				end
 
-				for i, tabInfo in pairs(tabs) do
-					Tween(i, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-						BackgroundTransparency = (i == tabSwitcher and 0.98 or 1)
-					}):Play()
-
-					if tabInfo.tabStroke then
-						Tween(tabInfo.tabStroke, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-							Transparency = (i == tabSwitcher and 0.95 or 1)
+				for _, v in pairs(tabSwitchersScrollingFrame:GetDescendants()) do
+					if v.Name == "TabSwitcher" then
+						Tween(v, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
+							BackgroundTransparency = 1
 						}):Play()
-					end
-					if tabInfo.switcherImage then
-						Tween(tabInfo.switcherImage, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-							ImageTransparency = (i == tabSwitcher and 0.2 or 0.4)
-						}):Play()
-					end
-					if tabInfo.switcherName then
-						Tween(tabInfo.switcherName, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
-							TextTransparency = (i == tabSwitcher and 0.2 or 0.4)
+						Tween(v:FindFirstChild("TabSwitcherUIStroke"), TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
+							Transparency = 1
 						}):Play()
 					end
 				end
 
-				tabs[tabSwitcher].tabContent.Parent = content
-				currentTabInstance = tabs[tabSwitcher].tabContent
+				tabs[tabSwitcher].Parent = content
+				currentTabInstance = tabs[tabSwitcher]
 				currentTab.Text = Settings.Name
+
+				Tween(tabSwitcher, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
+					BackgroundTransparency = 0.98
+				}):Play()
+				Tween(tabSwitcherUIStroke, TweenInfo.new(easetime, Enum.EasingStyle.Sine), {
+					Transparency = 0.95
+				}):Play()
 			end
 
 			tabSwitcher.MouseButton1Click:Connect(function()
@@ -4632,12 +4522,6 @@ function MacLib:Window(Settings)
 
 			function TabFunctions:InsertConfigSection(Side)
 				local configSection = TabFunctions:Section({ Side = "Left" })
-				
-				if isStudio then
-					configSection:Label({Text = "Config system unavailable. (Environment isStudio)"})
-					return "Config system unavailable." 
-				end
-				
 				local inputPath = nil
 				local selectedConfig = nil
 
@@ -4708,7 +4592,7 @@ function MacLib:Window(Settings)
 					end,
 				})
 
-                configSection:Button({
+				configSection:Button({
 					Name = "Overwrite Config",
 					Callback = function()
 						local success, returned = MacLib:SaveConfig(configSelection.Value)
@@ -4734,41 +4618,9 @@ function MacLib:Window(Settings)
 						configSelection:InsertOptions(MacLib:RefreshConfigList())
 					end,
 				})
-
-                local loadlabel
-                configSection:Button({
-					Name = "Set as autoload",
-					Callback = function()
-                        local name = selectedConfig
-                        writefile(MacLib.Folder .. "/settings/autoload.txt", name)
-                        loadlabel:UpdateBody("Current autoload config: " .. name)
-
-						WindowFunctions:Notify({
-							Title = "Interface",
-							Description = string.format("Set %q to auto load", name),
-						})
-					end,
-				})
-
-                loadlabel = configSection:Paragraph({
-                    Header = "Current Auto Load",
-                    Body = "None"
-                })
-
-                if isfile(MacLib.Folder .. "/settings/autoload.txt") then
-                    local name = readfile(MacLib.Folder .. "/settings/autoload.txt")
-                    loadlabel:UpdateBody("Current autoload config: " .. name)
-                end
-
 			end
 
-			tabs[tabSwitcher] = {
-				tabContent = elements1,
-				tabStroke = tabSwitcherUIStroke,
-				switcherImage = tabImage,
-				switcherName = tabSwitcherName,
-			}
-
+			tabs[tabSwitcher] = elements1
 			return TabFunctions
 		end
 
@@ -5320,13 +5172,13 @@ function MacLib:Window(Settings)
 	local function _SetUserInfoState(State)
 		if State then
 			headshot.Image = (isReady and headshotImage) or "rbxassetid://0"
-			username.Text = "@" .. LocalPlayer.Name
+			username.Text = "@"..LocalPlayer.Name
 			displayName.Text = LocalPlayer.DisplayName
 		else
 			headshot.Image = assets.userInfoBlurred
 			local nameLength = #LocalPlayer.Name
 			local displayNameLength = #LocalPlayer.DisplayName
-			username.Text = "@" .. string.rep(".", nameLength)
+			username.Text = "@"..string.rep(".", nameLength)
 			displayName.Text = string.rep(".", displayNameLength)
 		end
 	end
@@ -5361,7 +5213,7 @@ function MacLib:Window(Settings)
 		return baseUIScale.Scale
 	end
 
-	local ClassParser = {
+    local ClassParser = {
 		["Toggle"] = {
 			Save = function(Flag, data)
 				return {
@@ -5708,7 +5560,7 @@ function MacLib:Demo()
 			})
 		end,
 		onChanged = function(input)
-			print("Input is now " .. input)
+			print("Input is now ".. input)
 		end,
 	}, "Input")
 
@@ -5719,7 +5571,7 @@ function MacLib:Demo()
 		Maximum = 100,
 		DisplayMethod = "Percent",
 		Callback = function(Value)
-			print("Changed to " .. Value)
+			print("Changed to ".. Value)
 		end,
 	}, "Slider")
 
@@ -5739,14 +5591,14 @@ function MacLib:Demo()
 		Callback = function(binded)
 			Window:Notify({
 				Title = "Demo Window",
-				Description = "Pressed keybind - " .. tostring(binded.Name),
+				Description = "Pressed keybind - "..tostring(binded.Name),
 				Lifetime = 3
 			})
 		end,
 		onBinded = function(bind)
 			Window:Notify({
 				Title = "Demo Window",
-				Description = "Successfully Binded Keybind to - " .. tostring(bind.Name),
+				Description = "Successfully Binded Keybind to - "..tostring(bind.Name),
 				Lifetime = 3
 			})
 		end,
@@ -5796,7 +5648,7 @@ function MacLib:Demo()
 	local optionTable = {}
 
 	for i = 1,10 do
-		local formatted = "Option " .. tostring(i)
+		local formatted = "Option ".. tostring(i)
 		table.insert(optionTable, formatted)
 	end
 
@@ -5807,7 +5659,7 @@ function MacLib:Demo()
 		Options = optionTable,
 		Default = 1,
 		Callback = function(Value)
-			print("Dropdown changed: " .. Value)
+			print("Dropdown changed: ".. Value)
 		end,
 	}, "Dropdown")
 
@@ -5854,9 +5706,8 @@ function MacLib:Demo()
 		Text = "Sub-Label. Lorem ipsum odor amet, consectetuer adipiscing elit."
 	})
 
-	MacLib:SetFolder("MacLib")
+	MacLib:SetFolder("Maclib")
 	tabs.Settings:InsertConfigSection("Left")
-        MacLib:LoadAutoloadConfig()
 
 	Window.onUnloaded(function()
 		print("Unloaded!")
@@ -5865,4 +5716,4 @@ function MacLib:Demo()
 	tabs.Main:Select()
 end
 
-return Maclib
+return MacLib
