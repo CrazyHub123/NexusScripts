@@ -5708,6 +5708,8 @@ function MacLib:Demo()
 
 	MacLib:SetFolder("Maclib")
 	tabs.Settings:InsertConfigSection("Left")
+        MacLib:LoadAutoloadConfig()
+
 
 	Window.onUnloaded(function()
 		print("Unloaded!")
