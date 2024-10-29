@@ -4708,7 +4708,7 @@ function MacLib:Window(Settings)
 					end,
 				})
 
-				configSection:Button({
+                configSection:Button({
 					Name = "Overwrite Config",
 					Callback = function()
 						local success, returned = MacLib:SaveConfig(configSelection.Value)
@@ -4734,6 +4734,32 @@ function MacLib:Window(Settings)
 						configSelection:InsertOptions(MacLib:RefreshConfigList())
 					end,
 				})
+
+                local loadlabel
+                configSection:Button({
+					Name = "Set as autoload",
+					Callback = function()
+                        local name = selectedConfig
+                        writefile(MacLib.Folder .. "/settings/autoload.txt", name)
+                        loadlabel:UpdateBody("Current autoload config: " .. name)
+
+						WindowFunctions:Notify({
+							Title = "Interface",
+							Description = string.format("Set %q to auto load", name),
+						})
+					end,
+				})
+
+                loadlabel = configSection:Paragraph({
+                    Header = "Current Auto Load",
+                    Body = "None"
+                })
+
+                if isfile(MacLib.Folder .. "/settings/autoload.txt") then
+                    local name = readfile(MacLib.Folder .. "/settings/autoload.txt")
+                    loadlabel:UpdateBody("Current autoload config: " .. name)
+                end
+
 			end
 
 			tabs[tabSwitcher] = {
@@ -5345,7 +5371,7 @@ function MacLib:Window(Settings)
 				}
 			end,
 			Load = function(Flag, data)
-				if MacLib.Options[Flag] and data.State then
+				if MacLib.Options[Flag] and data.state then
 					MacLib.Options[Flag]:UpdateState(data.state)
 				end
 			end
@@ -5511,6 +5537,31 @@ function MacLib:Window(Settings)
 		end
 
 		return true
+	end
+
+    function MacLib:LoadAutoloadConfig()
+        if isfile(MacLib.Folder .. "/settings/autoload.txt") then
+
+            if isStudio then return "Config system unavailable." end
+
+            local name = readfile(MacLib.Folder .. "/settings/autoload.txt")
+
+            local success, err = MacLib:LoadConfig(name)
+            if not success then
+                return WindowFunctions:Notify({
+                    Title = "Interface",
+                    Description = "Failed to load autoload config: " .. err,
+                    Duration = 7
+                })
+            end
+
+            WindowFunctions:Notify({
+                Title = "Interface",
+                Description = string.format("Auto loaded config %q", name),
+                Duration = 7
+            })
+
+		end 
 	end
 
 	function MacLib:RefreshConfigList()
@@ -5803,8 +5854,9 @@ function MacLib:Demo()
 		Text = "Sub-Label. Lorem ipsum odor amet, consectetuer adipiscing elit."
 	})
 
-	MacLib:SetFolder("Maclib")
+	MacLib:SetFolder("MacLib")
 	tabs.Settings:InsertConfigSection("Left")
+        MacLib:LoadAutoloadConfig()
 
 	Window.onUnloaded(function()
 		print("Unloaded!")
@@ -5813,4 +5865,4 @@ function MacLib:Demo()
 	tabs.Main:Select()
 end
 
-return MacLib
+return Maclib
